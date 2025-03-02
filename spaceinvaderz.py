@@ -33,6 +33,18 @@ player.setheading(90) #sets the player upright but 180 sets it looking to the le
 #player movement
 playerspeed = 15
 
+#creating the invader
+invader = turtle.Turtle()
+invader.color("green")
+invader.shape("circle")
+invader.penup()
+invader.speed(0)
+invader.setposition(-200,250)
+
+invaderspeed = 2
+
+
+
 #Move the player left. takes the player(x) and it subtract the speed -= to the new location
 def move_left():
     x = player.xcor()
@@ -58,6 +70,26 @@ turtle.onkey(move_left, "Left")
 turtle.onkey(move_right, "Right")
 
 
+#Main game loop
+while True:
+        #Enemy movement
+    x = invader.xcor()
+    x += invaderspeed
+    invader.setx(x)
+    
+    #Enemy movement around, The ycor makes it go one coordinate down one
+    if invader.xcor() > 280:
+        y = invader.ycor() 
+        y -= 40
+        invaderspeed *= -1
+        invader.sety(y)
+        
+    if invader.xcor() < -280:
+        y = invader.ycor()
+        y -= 40
+        invaderspeed *= -1
+        invader.sety(y)
+        
+    mainscreen.update()
+    
 
-
-delay = input("press  enter to finish")
